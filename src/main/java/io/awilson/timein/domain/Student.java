@@ -2,11 +2,11 @@ package io.awilson.timein.domain;
 
 import lombok.*;
 import lombok.extern.java.Log;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -17,6 +17,9 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Version
+    private Integer version;
+
     private String firstName;
     private String lastName;
     private String instructor;
@@ -25,4 +28,5 @@ public class Student {
     public String getFullName() {
         return firstName + " " + this.lastName;
     }
+
 }
