@@ -52,9 +52,21 @@ public class StudentController {
         return "studentform";
     }
 
-    @RequestMapping("product/delete/{id}")
+    @RequestMapping("student/delete/{id}")
     public String delete(@PathVariable Integer id){
         studentService.deleteStudent(id);
-        return "redirect:/products";
+        return "redirect:/students";
+    }
+
+    @RequestMapping("student/{id}/login")
+    public String login(@PathVariable Integer id){
+        studentService.login(id);
+        return "redirect:/students";
+    }
+
+    @RequestMapping("student/{id}/logout")
+    public String logout(@PathVariable Integer id){
+        studentService.logout(id);
+        return "redirect:/students";
     }
 }

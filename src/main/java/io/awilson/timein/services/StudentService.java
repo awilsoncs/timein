@@ -10,4 +10,8 @@ public interface StudentService {
     Student saveStudent(Student student);
 
     void deleteStudent(Integer id);
+
+    void login(Integer id);
+
+    void logout(Integer id);
 }

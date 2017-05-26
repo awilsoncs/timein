@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring Framework Guru</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div th:if="${not #lists.isEmpty(sessions)}">
+        <h2>Session List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Student</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Duration</th>
+                <th>View</th>
+                <th>Edit</th>
+            </tr>
+            <tr th:each="session : ${sessions}">
+                <td th:text="${session.id}"><a href="/session/${session.id}">Id</a></td>
+                <td th:text="${session.student.fullName}">student</td>
+                <td th:text="${session.start}">start</td>
+                <td th:text="${session.end}">end</td>
+                <td th:text="${session.duration}">duration</td>
+                <td><a th:href="${ '/session/' + session.id}">View</a></td>
+                <td><a th:href="${'/session/edit/' + session.id}">Edit</a></td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>

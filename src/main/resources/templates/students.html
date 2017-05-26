@@ -18,6 +18,8 @@
                 <th>Last Name</th>
                 <th>Course</th>
                 <th>Instructor</th>
+                <th>Login</th>
+                <th>Logout</th>
                 <th>View</th>
                 <th>Edit</th>
             </tr>
@@ -27,8 +29,10 @@
                 <td th:text="${student.lastName}">LastName</td>
                 <td th:text="${student.course}">Course</td>
                 <td th:text="${student.instructor}">Instructor</td>
+                <td><a th:href="${ '/student/' + student.id + '/login'}">Login</a></td>
+                <td><a th:href="${ '/student/' + student.id + '/logout'}">Logout</a></td>
                 <td><a th:href="${ '/student/' + student.id}">View</a></td>
-                <td><a th:href="${'/student/edit/' + student.id}">Edit</a></td>
+                <td><a th:href="${ '/student/edit/' + student.id}">Edit</a></td>
             </tr>
         </table>
 
