@@ -8,8 +8,7 @@ import java.time.Instant;
 
 @Data
 @Entity
-@RequiredArgsConstructor
-@EqualsAndHashCode(exclude={"student"})
+@EqualsAndHashCode(of = {"id"})
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

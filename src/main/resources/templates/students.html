@@ -27,8 +27,8 @@
                 <td th:text="${student.id}"><a href="/student/${student.id}">Id</a></td>
                 <td th:text="${student.firstName}">FirstName</td>
                 <td th:text="${student.lastName}">LastName</td>
-                <td th:text="${student.course}">Course</td>
-                <td th:text="${student.instructor}">Instructor</td>
+                <td th:text="${student.course.title}">Course</td>
+                <td th:text="${student.instructor.fullName}">Instructor</td>
                 <td><a th:href="${ '/student/' + student.id + '/login'}">Login</a></td>
                 <td><a th:href="${ '/student/' + student.id + '/logout'}">Logout</a></td>
                 <td><a th:href="${ '/student/' + student.id}">View</a></td>

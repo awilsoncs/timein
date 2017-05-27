@@ -1,5 +1,6 @@
 package io.awilson.timein.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.extern.java.Log;
 
@@ -8,7 +9,8 @@ import java.util.List;
 
 @Data
 @Entity
-@Log
+@ToString(exclude = {"instructor", "sessions"})
+@EqualsAndHashCode(exclude = {"instructor"})
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,8 +19,10 @@ public class Student {
     private Integer version;
     private String firstName;
     private String lastName;
-    private String instructor;
-    private String course;
+    @ManyToOne
+    private Instructor instructor;
+    @ManyToOne
+    private Course course;
     @OneToMany(mappedBy = "student")
     private List<Session> sessions;
     @OneToOne
@@ -36,5 +40,4 @@ public class Student {
     public String getFullName() {
         return firstName + " " + this.lastName;
     }
-
 }

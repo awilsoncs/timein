@@ -1,6 +1,7 @@
 package io.awilson.timein.controllers;
 
 import io.awilson.timein.domain.Student;
+import io.awilson.timein.services.InstructorService;
 import io.awilson.timein.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Provide a Controller for the Student class.
@@ -16,14 +18,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class StudentController {
 
     private StudentService studentService;
+    private InstructorService instructorService;
 
     @Autowired
     public void setStudentService(StudentService studentService) {
         this.studentService = studentService;
     }
 
+    @Autowired
+    public void setInstructorService(InstructorService instructorService) { this.instructorService = instructorService; }
+
+    @RequestMapping(value = "api/student/{id}", method = RequestMethod.GET)
+    public Student apiGetStudent(@PathVariable Integer id) {
+        return studentService.getStudentById(id);
+    }
+
     @RequestMapping("student/new")
     public String newStudent(Model model){
+        model.addAttribute("instructors", instructorService.listAllInstructors());
         model.addAttribute("student", new Student());
         return "studentform";
     }
@@ -48,6 +60,7 @@ public class StudentController {
 
     @RequestMapping("student/edit/{id}")
     public String edit(@PathVariable Integer id, Model model){
+        model.addAttribute("instructors", instructorService.listAllInstructors());
         model.addAttribute("student", studentService.getStudentById(id));
         return "studentform";
     }
