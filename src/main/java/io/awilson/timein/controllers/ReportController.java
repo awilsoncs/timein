@@ -1,6 +1,8 @@
 package io.awilson.timein.controllers;
 
+import io.awilson.timein.domain.Instructor;
 import io.awilson.timein.domain.Session;
+import io.awilson.timein.reports.CumulativeTimeReport;
 import io.awilson.timein.services.CourseService;
 import io.awilson.timein.services.InstructorService;
 import io.awilson.timein.services.SessionService;
@@ -30,9 +32,10 @@ public class ReportController {
         this.studentService = studentService;
     }
 
-    @RequestMapping("report/cumulative-time")
+    @RequestMapping("report/cumulative")
     public String showCumulativeTime(Model model){
-
+        CumulativeTimeReport cumulativeTimeReport = new CumulativeTimeReport(studentService.listAllStudents());
+        model.addAttribute("records", cumulativeTimeReport.getStudentDurations());
         return "cumulativetime";
     }
 }
