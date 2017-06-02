@@ -17,7 +17,6 @@ public class CumulativeTimeReport {
 
     @Getter
     private Map<Student, Duration> studentDurations;
-    private StudentService studentService;
 
     public CumulativeTimeReport(Iterable<Student> students) {
         studentDurations = new HashMap<>();
