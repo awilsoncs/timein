@@ -10,7 +10,7 @@
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
-    <h2>Product Details</h2>
+    <h2>Student Details</h2>
     <div>
         <form class="form-horizontal" th:object="${student}" th:action="@{/student}" method="post">
             <input type="hidden" th:field="*{id}"/>
@@ -30,13 +30,15 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Course:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{course}"/>
+                    <select class="form-control" th:field="*{course}">
+                        <option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.title}">course</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Instructor:</label>
                 <div class="col-sm-10">
-                    <select th:field="*{instructor}">
+                    <select class="form-control" th:field="*{instructor}">
                         <option th:each="instructor : ${instructors}" th:value="${instructor.id}" th:text="${instructor.fullName}">Instructor</option>
                     </select>
                 </div>

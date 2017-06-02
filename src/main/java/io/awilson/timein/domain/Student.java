@@ -1,10 +1,9 @@
 package io.awilson.timein.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import lombok.extern.java.Log;
 
 import javax.persistence.*;
+import java.time.Duration;
 import java.util.List;
 
 @Data
@@ -34,10 +33,17 @@ public class Student {
      */
     public Boolean anyActive() {
         return sessions.stream()
-                .anyMatch(x -> x.getEnd() == null);
+                .anyMatch(x -> x.getTimeEnd() == null);
     }
 
     public String getFullName() {
         return firstName + " " + this.lastName;
+    }
+
+    public Duration getTime() {
+        return sessions.stream()
+                .map(Session::getDuration)
+                .reduce((x, y) -> x.plus(y))
+                .get();
     }
 }

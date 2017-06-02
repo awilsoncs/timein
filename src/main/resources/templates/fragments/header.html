@@ -6,31 +6,55 @@
           th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
           rel="stylesheet" media="screen"/>
 
+    <script src="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/js/bootstrap.min.js"
+            th:src="@{/webjars/bootstrap/3.3.4/js/bootstrap.min.js}"></script>
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
             th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
-
-    <link href="../../static/css/guru.css"
-          th:href="@{css/guru.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
 
 <div class="container">
     <div th:fragment="header">
-        <nav class="navbar navbar-default">
+        <div id="timein-menu" class="navbar navbar-default " role="navigation">
             <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
-                    <ul class="nav navbar-nav">
-                        <li><a href="#" th:href="@{/students}">Students</a></li>
-                        <li><a href="#" th:href="@{/student/new}">New Student</a></li>
-                        <li><a href="#" th:href="@{/instructors}">Instructors</a></li>
-                        <li><a href="#" th:href="@{/instructor/new}">New Instructor</a></li>
-                        <li><a href="#" th:href="@{/sessions}">Sessions</a></li>
+                <div class="navbar-header"><a class="navbar-brand" href="/">TimeIn</a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse navbar-menubuilder">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Students <b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a th:href="@{/students}">All Students</a>
+                                </li>
+                                <li><a th:href="@{/student/new}">New Student</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a th:href="@{/sessions}">Sessions</a>
+                        </li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Other <b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a th:href="@{/instructors}">Instructors</a></li>
+                                <li><a th:href="@{/instructor/new}">New Instructor</a></li>
+                                <li><a th:href="@{/courses}">Courses</a></li>
+                                <li><a th:href="@{/course/new}">New Course</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports <b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="reports/weekly-grades">Weekly Grades</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
-
                 </div>
             </div>
-        </nav>
+        </div>
 
         <div class="jumbotron">
             <div class="row text-center">
@@ -39,10 +63,6 @@
 
                     <h3>In/Out logging application</h3>
                 </div>
-            </div>
-            <div class="row text-center">
-                <img src="../../static/images/NewBannerBOOTS_2.png" width="400"
-                     th:src="@{/images/NewBannerBOOTS_2.png}"/>
             </div>
         </div>
     </div>

@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -13,10 +14,16 @@ public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     @Version
     private Integer version;
-    private Instant start = Instant.now();
-    private Instant end;
+
+    @Column
+    private Instant timeStart = Instant.now();
+
+    @Column
+    private Instant timeEnd;
+
     @ManyToOne
     private Student student;
 
@@ -25,14 +32,14 @@ public class Session {
      * @return
      */
     public Duration getDuration(){
-        if(end == null) {
-            return Duration.between(start, Instant.now());
+        if(timeEnd == null) {
+            return Duration.between(timeStart, Instant.now());
         } else {
-            return Duration.between(start, end);
+            return Duration.between(timeStart, timeEnd);
         }
     }
 
     public void close() {
-        end = Instant.now();
+        timeEnd = Instant.now();
     }
 }

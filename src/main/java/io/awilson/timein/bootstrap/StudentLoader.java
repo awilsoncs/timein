@@ -47,29 +47,5 @@ public class StudentLoader implements ApplicationListener<ContextRefreshedEvent>
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-
-        Instructor instructor = new Instructor();
-        instructor.setFirstName("Yo");
-        instructor.setLastName("Derkson");
-        instructorRepository.save(instructor);
-
-        Course course = new Course();
-        course.setTitle("Dumb School");
-        courseRepository.save(course);
-
-        Student testA = new Student();
-        testA.setFirstName("Test");
-        testA.setLastName("Testerson");
-        testA.setCourse(course);
-        testA.setInstructor(instructor);
-        studentRepository.save(testA);
-
-        log.info("Saved Student - id: " + testA.getId());
-
-        Session session = new Session();
-        session.setStudent(testA);
-        session.setStart(Instant.now());
-        session.setEnd(Instant.now());
-        sessionRepository.save(session);
     }
 }

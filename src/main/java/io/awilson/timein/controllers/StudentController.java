@@ -1,6 +1,7 @@
 package io.awilson.timein.controllers;
 
 import io.awilson.timein.domain.Student;
+import io.awilson.timein.services.CourseService;
 import io.awilson.timein.services.InstructorService;
 import io.awilson.timein.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,19 @@ public class StudentController {
 
     private StudentService studentService;
     private InstructorService instructorService;
+    private CourseService courseService;
 
     @Autowired
-    public void setStudentService(StudentService studentService) {
+    public StudentController(StudentService studentService, InstructorService instructorService, CourseService courseService) {
         this.studentService = studentService;
-    }
-
-    @Autowired
-    public void setInstructorService(InstructorService instructorService) { this.instructorService = instructorService; }
-
-    @RequestMapping(value = "api/student/{id}", method = RequestMethod.GET)
-    public Student apiGetStudent(@PathVariable Integer id) {
-        return studentService.getStudentById(id);
+        this.instructorService = instructorService;
+        this.courseService = courseService;
     }
 
     @RequestMapping("student/new")
     public String newStudent(Model model){
         model.addAttribute("instructors", instructorService.listAllInstructors());
+        model.addAttribute("courses", courseService.listAllCourses());
         model.addAttribute("student", new Student());
         return "studentform";
     }
@@ -61,6 +58,7 @@ public class StudentController {
     @RequestMapping("student/edit/{id}")
     public String edit(@PathVariable Integer id, Model model){
         model.addAttribute("instructors", instructorService.listAllInstructors());
+        model.addAttribute("courses", courseService.listAllCourses());
         model.addAttribute("student", studentService.getStudentById(id));
         return "studentform";
     }
