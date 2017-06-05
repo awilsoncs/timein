@@ -34,7 +34,15 @@ public class ReportController {
 
     @RequestMapping("report/cumulative")
     public String showCumulativeTime(Model model){
-        CumulativeTimeReport cumulativeTimeReport = new CumulativeTimeReport(studentService.listAllStudents());
+        CumulativeTimeReport cumulativeTimeReport = new CumulativeTimeReport(sessionService.listAllSessions());
+        model.addAttribute("records", cumulativeTimeReport.getStudentDurations());
+        return "cumulativetime";
+    }
+
+    @RequestMapping("report/weekly")
+    public String showWeeklyTime(Model model){
+        CumulativeTimeReport cumulativeTimeReport =
+                CumulativeTimeReport.getWeeklyTimeReport(sessionService.listAllSessions());
         model.addAttribute("records", cumulativeTimeReport.getStudentDurations());
         return "cumulativetime";
     }

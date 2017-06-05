@@ -3,9 +3,7 @@ package io.awilson.timein.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDateTime;
+import java.time.*;
 
 @Data
 @Entity
@@ -37,6 +35,11 @@ public class Session {
         } else {
             return Duration.between(timeStart, timeEnd);
         }
+    }
+
+    @Transient
+    public LocalDate getDay() {
+        return LocalDateTime.ofInstant(timeStart, ZoneId.systemDefault()).toLocalDate();
     }
 
     public void close() {
