@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.*;
+import static java.time.DayOfWeek.FRIDAY;
+import static java.time.temporal.TemporalAdjusters.next;
 
 @Data
 @Entity
@@ -40,6 +42,14 @@ public class Session {
     @Transient
     public LocalDate getDay() {
         return LocalDateTime.ofInstant(timeStart, ZoneId.systemDefault()).toLocalDate();
+    }
+
+    /**
+     * Return the date of the Friday following this Session.
+     */
+    @Transient
+    public LocalDate getWeekEnd() {
+        return getDay().with(next(FRIDAY));
     }
 
     public void close() {
