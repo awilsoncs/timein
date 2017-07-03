@@ -2,18 +2,15 @@ package io.awilson.timein.services;
 
 import io.awilson.timein.domain.Instructor;
 import io.awilson.timein.repositories.InstructorRepository;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class InstructorServiceImpl implements InstructorService {
 
+    @Setter(onMethod = @_(@Autowired))
     private InstructorRepository instructorRepository;
-
-    @Autowired
-    public void setInstructorRepository(InstructorRepository instructorRepository) {
-        this.instructorRepository = instructorRepository;
-    }
 
     @Override
     public Iterable<Instructor> listAllInstructors() {

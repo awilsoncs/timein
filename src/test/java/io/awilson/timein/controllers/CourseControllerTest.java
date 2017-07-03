@@ -14,7 +14,6 @@ import static org.mockito.Mockito.*;
  */
 public class CourseControllerTest {
 
-    private Model model = mock(Model.class);
     private CourseController courseController;
 
     @Before
@@ -58,7 +57,7 @@ public class CourseControllerTest {
 
     @Test
     public void showCourse() throws Exception {
-        
+
     }
 
     @Test

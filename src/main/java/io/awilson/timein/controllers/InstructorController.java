@@ -2,6 +2,7 @@ package io.awilson.timein.controllers;
 
 import io.awilson.timein.domain.Instructor;
 import io.awilson.timein.services.InstructorService;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class InstructorController {
 
+    @Setter(onMethod = @_(@Autowired))
     private InstructorService instructorService;
-
-    @Autowired
-    public void setInstructorService(InstructorService instructorService) {
-        this.instructorService = instructorService;
-    }
 
     @RequestMapping("instructor/new")
     public String newInstructor(Model model){

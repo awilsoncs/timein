@@ -4,6 +4,7 @@ import io.awilson.timein.domain.Session;
 import io.awilson.timein.domain.Student;
 
 import lombok.Getter;
+import lombok.extern.java.Log;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -20,6 +21,7 @@ import java.util.stream.StreamSupport;
 /**
  * Provide reports that roll up Session Durations based on criteria function and groups by Student.
  */
+@Log
 public class CumulativeTimeReport {
 
     @Getter
@@ -31,6 +33,7 @@ public class CumulativeTimeReport {
      * @param filter A filter.
      */
     public CumulativeTimeReport(Iterable<Session> sessions, Predicate<Session> filter) {
+        log.info("Generating Cumulative Time report.");
         Stream<Session> sessionStream = StreamSupport.stream(sessions.spliterator(), false);
 
         studentDurations = sessionStream
@@ -39,6 +42,10 @@ public class CumulativeTimeReport {
                         Collectors.reducing(Duration.ZERO, Session::getDuration, Duration::plus)));
     }
 
+    /**
+     * Constructor for all sessions.
+     * @param sessions
+     */
     public CumulativeTimeReport(Iterable<Session> sessions) {
         this(sessions, x -> true);
     }
@@ -62,7 +69,7 @@ public class CumulativeTimeReport {
         LocalDate nextSunday = localDate.with(next(SUNDAY));
         return new CumulativeTimeReport(
                 sessions,
-                x -> x.getDay().isAfter(lastSunday) && x.getDay().isBefore(nextSunday)
+                x -> x.getDate().isAfter(lastSunday) && x.getDate().isBefore(nextSunday)
         );
     }
 }

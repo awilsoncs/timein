@@ -4,30 +4,24 @@ import io.awilson.timein.domain.Student;
 import io.awilson.timein.services.CourseService;
 import io.awilson.timein.services.InstructorService;
 import io.awilson.timein.services.StudentService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Provide a Controller for the Student class.
  */
 @Controller
+@AllArgsConstructor(onConstructor = @_(@Autowired))
 public class StudentController {
 
     private StudentService studentService;
     private InstructorService instructorService;
     private CourseService courseService;
-
-    @Autowired
-    public StudentController(StudentService studentService, InstructorService instructorService, CourseService courseService) {
-        this.studentService = studentService;
-        this.instructorService = instructorService;
-        this.courseService = courseService;
-    }
 
     @RequestMapping("student/new")
     public String newStudent(Model model){

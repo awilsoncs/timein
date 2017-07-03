@@ -14,16 +14,12 @@ public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     @Version
     private Integer version;
-
     @Column
     private Instant timeStart = Instant.now();
-
     @Column
     private Instant timeEnd;
-
     @ManyToOne
     private Student student;
 
@@ -39,8 +35,12 @@ public class Session {
         }
     }
 
+    /**
+     * Get date that the session started on.
+     * @return
+     */
     @Transient
-    public LocalDate getDay() {
+    public LocalDate getDate() {
         return LocalDateTime.ofInstant(timeStart, ZoneId.systemDefault()).toLocalDate();
     }
 
@@ -49,9 +49,12 @@ public class Session {
      */
     @Transient
     public LocalDate getWeekEnd() {
-        return getDay().with(next(FRIDAY));
+        return getDate().with(next(FRIDAY));
     }
 
+    /**
+     * End the session now.
+     */
     public void close() {
         timeEnd = Instant.now();
     }

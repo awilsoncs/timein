@@ -2,6 +2,7 @@ package io.awilson.timein.controllers;
 
 import io.awilson.timein.domain.Session;
 import io.awilson.timein.services.SessionService;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class SessionController {
 
+    @Setter(onMethod = @_(@Autowired))
     private SessionService sessionService;
-
-    @Autowired
-    public void setSessionService(SessionService sessionService) {
-        this.sessionService = sessionService;
-    }
 
     @RequestMapping("session/new")
     public String newSession(Model model){

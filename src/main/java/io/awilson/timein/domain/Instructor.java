@@ -22,6 +22,7 @@ public class Instructor {
     private String email;
     @OneToMany(mappedBy = "instructor")
     private List<Student> students;
+
     public String getFullName() {
         return firstName + " " + this.lastName;
     }

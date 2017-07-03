@@ -3,25 +3,17 @@ package io.awilson.timein.services;
 import io.awilson.timein.domain.Session;
 import io.awilson.timein.domain.Student;
 import io.awilson.timein.repositories.StudentRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor(onConstructor = @_(@Autowired))
 public class StudentServiceImpl implements StudentService{
 
     private StudentRepository studentRepository;
 
     private SessionService sessionService;
-
-    @Autowired
-    public void setStudentRepository(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
-
-    @Autowired
-    public void setSessionService(SessionService sessionService) {
-        this.sessionService = sessionService;
-    }
 
     @Override
     public Iterable<Student> listAllStudents() {

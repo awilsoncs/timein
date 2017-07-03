@@ -2,23 +2,18 @@ package io.awilson.timein.services;
 
 import io.awilson.timein.domain.Course;
 import io.awilson.timein.repositories.CourseRepository;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CourseServiceImpl implements CourseService {
 
+    @Setter(onMethod = @_(@Autowired))
     private CourseRepository courseRepository;
 
-    @Autowired
-    public void setCourseRepository(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
-    }
-
     @Override
-    public Iterable<Course> listAllCourses() {
-        return courseRepository.findAll();
-    }
+    public Iterable<Course> listAllCourses() { return courseRepository.findAll(); }
 
     @Override
     public Course getCourseById(Integer id) {
