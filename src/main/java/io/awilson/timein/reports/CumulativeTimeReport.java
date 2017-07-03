@@ -3,28 +3,25 @@ package io.awilson.timein.reports;
 import io.awilson.timein.domain.Session;
 import io.awilson.timein.domain.Student;
 
-import lombok.Getter;
-import lombok.extern.java.Log;
-
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Map;
+import java.util.function.Predicate;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
+
 import static java.time.DayOfWeek.SUNDAY;
 import static java.time.temporal.TemporalAdjusters.next;
 import static java.time.temporal.TemporalAdjusters.previous;
 
-import java.util.Map;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
 /**
  * Provide reports that roll up Session Durations based on criteria function and groups by Student.
  */
-@Log
 public class CumulativeTimeReport {
 
-    @Getter
+    private static final Logger log = Logger.getLogger(CumulativeTimeReport.class.getName());
     private Map<Student, Duration> studentDurations;
 
     /**
@@ -71,5 +68,9 @@ public class CumulativeTimeReport {
                 sessions,
                 x -> x.getDate().isAfter(lastSunday) && x.getDate().isBefore(nextSunday)
         );
+    }
+
+    public Map<Student, Duration> getStudentDurations() {
+        return this.studentDurations;
     }
 }
