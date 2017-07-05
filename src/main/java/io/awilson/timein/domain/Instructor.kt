@@ -1,5 +1,6 @@
 package io.awilson.timein.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -12,6 +13,7 @@ class Instructor {
     var firstName: String = ""
     var lastName: String = ""
     var email: String = ""
+    @JsonIgnore
     @OneToMany(mappedBy = "instructor")
     var students: MutableList<Student> = ArrayList()
 

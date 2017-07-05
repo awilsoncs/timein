@@ -1,5 +1,6 @@
 package io.awilson.timein.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 import java.time.Duration
 
@@ -16,6 +17,7 @@ class Student {
     var instructor: Instructor? = null
     @ManyToOne
     var course: Course? = null
+    @JsonIgnore
     @OneToMany(mappedBy = "student")
     var sessions: MutableList<Session> = ArrayList()
     @OneToOne

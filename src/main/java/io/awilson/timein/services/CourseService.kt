@@ -5,7 +5,7 @@ import io.awilson.timein.domain.Course
 interface CourseService {
     fun listAllCourses(): Iterable<Course>
 
-    fun getCourseById(id: Int): Course
+    fun getCourseById(id: Int): Course?
 
     fun saveCourse(course: Course): Course
 
