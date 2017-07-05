@@ -19,10 +19,10 @@
                 <th>Edit</th>
             </tr>
             <tr th:each="course : ${courses}">
-                <td th:text="${course.id}"><a href="/course/${course.id}">Id</a></td>
+                <td th:text="${course.id}"><a href="/courses/${course.id}">Id</a></td>
                 <td th:text="${course.title}">Title</td>
-                <td><a th:href="${ '/course/' + course.id}">View</a></td>
-                <td><a th:href="${ '/course/edit/' + course.id}">Edit</a></td>
+                <td><a th:href="${ '/courses/' + course.id}">View</a></td>
+                <td><a th:href="${ '/courses/' + course.id + '/edit'}">Edit</a></td>
             </tr>
         </table>
 
