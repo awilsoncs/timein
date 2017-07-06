@@ -13,7 +13,8 @@ class InstructorServiceImpl : InstructorService {
 
     override fun listAllInstructors(): Iterable<Instructor> = instructorRepository.findAll()
 
-    override fun getInstructorById(id: Int): Instructor? = instructorRepository.findOne(id)
+    override fun getInstructorById(id: Int): Instructor = instructorRepository.findOne(id)
+            ?: throw Exception("Instructor:$id not found")
 
     override fun saveInstructor(instructor: Instructor): Instructor = instructorRepository.save(instructor)
 

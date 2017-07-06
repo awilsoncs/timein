@@ -13,7 +13,8 @@ class SessionServiceImpl : SessionService {
 
     override fun listAllSessions(): Iterable<Session> = sessionRepository.findAll()
 
-    override fun getSessionById(id: Int): Session? = sessionRepository.findOne(id)
+    override fun getSessionById(id: Int): Session = sessionRepository.findOne(id)
+            ?: throw Exception("Session:$id not found")
 
     override fun saveSession(session: Session): Session = sessionRepository.save(session)
 

@@ -27,7 +27,7 @@ class Student {
 
      * @return true if the student has at least one active session.
      */
-    fun anyActive(): Boolean? = sessions.stream().anyMatch { x -> x.isOpen }
+    fun anyActive(): Boolean = sessions.stream().anyMatch { it.isOpen }
 
     val fullName: String
         get() = "$firstName $lastName"

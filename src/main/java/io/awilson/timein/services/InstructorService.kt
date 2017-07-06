@@ -5,7 +5,7 @@ import io.awilson.timein.domain.Instructor
 interface InstructorService {
     fun listAllInstructors(): Iterable<Instructor>
 
-    fun getInstructorById(id: Int): Instructor?
+    fun getInstructorById(id: Int): Instructor
 
     fun saveInstructor(instructor: Instructor): Instructor
 

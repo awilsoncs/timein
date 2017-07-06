@@ -24,13 +24,7 @@ class Session {
      * @return
      */
     val duration: Duration
-        get() {
-            if (timeEnd == null) {
-                return Duration.between(timeStart, Instant.now())
-            } else {
-                return Duration.between(timeStart, timeEnd)
-            }
-        }
+        get() = Duration.between(timeStart, timeEnd ?: Instant.now())
 
     /**
      * Get date that the session started on.

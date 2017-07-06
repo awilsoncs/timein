@@ -5,7 +5,7 @@ import io.awilson.timein.domain.Student
 interface StudentService {
     fun listAllStudents(): Iterable<Student>
 
-    fun getStudentById(id: Int): Student?
+    fun getStudentById(id: Int): Student
 
     fun saveStudent(student: Student): Student
 

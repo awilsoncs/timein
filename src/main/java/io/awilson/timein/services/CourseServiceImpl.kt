@@ -13,7 +13,8 @@ class CourseServiceImpl : CourseService {
 
     override fun listAllCourses(): Iterable<Course> = courseRepository.findAll()
 
-    override fun getCourseById(id: Int): Course? = courseRepository.findOne(id)
+    override fun getCourseById(id: Int): Course = courseRepository.findOne(id)
+            ?: throw Exception("Course:$id not found")
 
     override fun saveCourse(course: Course): Course = courseRepository.save(course)
 

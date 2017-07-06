@@ -19,9 +19,8 @@ class StudentServiceImpl : StudentService {
         return studentRepository.findAll()
     }
 
-    override fun getStudentById(id: Int): Student? {
-        return studentRepository.findOne(id)
-    }
+    override fun getStudentById(id: Int): Student = studentRepository.findOne(id)
+            ?: throw Exception("Student:$id not found")
 
     override fun saveStudent(student: Student): Student {
         return studentRepository.save(student)
@@ -32,7 +31,7 @@ class StudentServiceImpl : StudentService {
     }
 
     override fun login(id: Int) {
-        val student = getStudentById(id) ?: throw Exception("Student:$id not found")
+        val student = getStudentById(id)
         val session = Session()
         session.student = student
         sessionService.saveSession(session)
@@ -42,7 +41,7 @@ class StudentServiceImpl : StudentService {
     }
 
     override fun logout(id: Int) {
-        val student = getStudentById(id) ?: throw Exception("Student:$id not found")
+        val student = getStudentById(id)
         val session = student.currentSession ?: return
 
         session.close()
