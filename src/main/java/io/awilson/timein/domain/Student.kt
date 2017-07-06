@@ -2,7 +2,6 @@ package io.awilson.timein.domain
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
-import java.time.Duration
 
 @Entity
 class Student {

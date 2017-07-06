@@ -3,7 +3,6 @@ package io.awilson.timein.services
 import io.awilson.timein.domain.Session
 import io.awilson.timein.domain.Student
 import io.awilson.timein.repositories.StudentRepository
-import lombok.AllArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -20,7 +19,7 @@ class StudentServiceImpl : StudentService {
         return studentRepository.findAll()
     }
 
-    override fun getStudentById(id: Int): Student {
+    override fun getStudentById(id: Int): Student? {
         return studentRepository.findOne(id)
     }
 
@@ -33,7 +32,7 @@ class StudentServiceImpl : StudentService {
     }
 
     override fun login(id: Int) {
-        val student = getStudentById(id)
+        val student = getStudentById(id) ?: throw Exception("Student:$id not found")
         val session = Session()
         session.student = student
         sessionService.saveSession(session)
@@ -43,15 +42,12 @@ class StudentServiceImpl : StudentService {
     }
 
     override fun logout(id: Int) {
-        val student = getStudentById(id)
-        val session = student.currentSession
-        if (session == null) {
-            return
-        } else {
-            session.close()
-            sessionService.saveSession(session)
-            student.currentSession = null
-            studentRepository.save(student)
-        }
+        val student = getStudentById(id) ?: throw Exception("Student:$id not found")
+        val session = student.currentSession ?: return
+
+        session.close()
+        sessionService.saveSession(session)
+        student.currentSession = null
+        studentRepository.save(student)
     }
 }

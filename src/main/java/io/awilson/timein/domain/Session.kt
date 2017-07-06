@@ -13,7 +13,7 @@ class Session {
     var id: Int = 0
     @Version
     var version: Int = 0
-    var timeStart = Instant.now()
+    var timeStart: Instant = Instant.now()
     var timeEnd: Instant? = null
     @ManyToOne
     var student: Student? = null

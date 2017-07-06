@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
-
+/**
+ * RESTful api endpoints for Courses
+ */
 @RestController
 @RequestMapping("/api/courses")
 class CourseApiController {
@@ -19,7 +21,7 @@ class CourseApiController {
     @GetMapping("/{id}")
     fun get(@PathVariable id: Int): ResponseEntity<Course> {
         val course : Course = service.getCourseById(id) ?: throw Exception("Could not find Course with id:$id")
-        return ResponseEntity<Course>(course, HttpStatus.OK)
+        return ResponseEntity(course, HttpStatus.OK)
     }
 
     /**
@@ -28,7 +30,7 @@ class CourseApiController {
     @GetMapping
     fun get(): ResponseEntity<Iterable<Course>> {
         val courses: Iterable<Course> = service.listAllCourses()
-        return ResponseEntity<Iterable<Course>>(courses, HttpStatus.OK)
+        return ResponseEntity(courses, HttpStatus.OK)
     }
 
     /**
@@ -37,7 +39,7 @@ class CourseApiController {
     @PostMapping
     fun post(@RequestBody course: Course): ResponseEntity<Course> {
         val updated = service.saveCourse(course)
-        return ResponseEntity<Course>(updated, HttpStatus.OK)
+        return ResponseEntity(updated, HttpStatus.OK)
     }
 
     /**
