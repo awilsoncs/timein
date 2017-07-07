@@ -1,5 +1,6 @@
 package io.awilson.timein.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 import java.time.*
 
@@ -15,6 +16,7 @@ class Session {
     var version: Int = 0
     var timeStart: Instant = Instant.now()
     var timeEnd: Instant? = null
+    @JsonIgnore
     @ManyToOne
     var student: Student? = null
 
@@ -48,6 +50,12 @@ class Session {
     val isOpen: Boolean
         @Transient
         get() = timeEnd == null
+
+    /**
+     * Return the id of the Student
+     */
+    val studentId: Int?
+        get() = student?.id
 
     /**
      * End the session now.

@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service
 class InstructorServiceImpl : InstructorService {
 
     @Autowired
-    lateinit var instructorRepository: InstructorRepository
+    lateinit var repo: InstructorRepository
 
-    override fun listAllInstructors(): Iterable<Instructor> = instructorRepository.findAll()
+    override fun listAllInstructors(): Iterable<Instructor> = repo.findAll()
 
-    override fun getInstructorById(id: Int): Instructor = instructorRepository.findOne(id)
+    override fun getInstructorById(id: Int): Instructor = repo.findOne(id)
             ?: throw Exception("Instructor:$id not found")
 
-    override fun saveInstructor(instructor: Instructor): Instructor = instructorRepository.save(instructor)
+    override fun saveInstructor(instructor: Instructor): Instructor = repo.save(instructor)
 
-    override fun deleteInstructor(id: Int) = instructorRepository.delete(id)
+    override fun deleteInstructor(id: Int) = repo.delete(id)
 }

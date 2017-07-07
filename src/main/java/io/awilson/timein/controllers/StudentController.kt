@@ -27,7 +27,7 @@ class StudentController {
     @RequestMapping("student/new")
     fun newStudent(model: Model): String {
         model.addAttribute("instructors", instructorService.listAllInstructors())
-        model.addAttribute("courses", courseService.listAllCourses())
+        model.addAttribute("courses", courseService.listAll())
         model.addAttribute("student", Student())
         return "studentform"
     }
@@ -53,7 +53,7 @@ class StudentController {
     @RequestMapping("student/edit/{id}")
     fun edit(@PathVariable id: Int, model: Model): String {
         model.addAttribute("instructors", instructorService.listAllInstructors())
-        model.addAttribute("courses", courseService.listAllCourses())
+        model.addAttribute("courses", courseService.listAll())
         model.addAttribute("student", studentService.getStudentById(id))
         return "studentform"
     }

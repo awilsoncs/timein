@@ -25,31 +25,31 @@ class CourseController {
 
     @PostMapping
     fun post(course: Course): String {
-        courseService.saveCourse(course)
+        courseService.save(course)
         return "redirect:/course/" + course.id
     }
 
     @RequestMapping("/{id}")
     fun show(@PathVariable id: Int, model: Model): String {
-        model.addAttribute("course", courseService.getCourseById(id))
+        model.addAttribute("course", courseService.getById(id))
         return "courseshow"
     }
 
     @GetMapping
     fun list(model: Model): String {
-        model.addAttribute("courses", courseService.listAllCourses())
+        model.addAttribute("courses", courseService.listAll())
         return "courses"
     }
 
     @RequestMapping("/{id}/edit")
     fun edit(@PathVariable id: Int, model: Model): String {
-        model.addAttribute("course", courseService.getCourseById(id))
+        model.addAttribute("course", courseService.getById(id))
         return "courseform"
     }
 
     @RequestMapping("/{id}/delete")
     fun delete(@PathVariable id: Int): String {
-        courseService.deleteCourse(id)
+        courseService.delete(id)
         return "redirect:/courses"
     }
 }

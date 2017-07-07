@@ -9,14 +9,13 @@ import org.springframework.stereotype.Service
 class SessionServiceImpl : SessionService {
 
     @Autowired
-    lateinit var sessionRepository: SessionRepository
+    lateinit var repo: SessionRepository
 
-    override fun listAllSessions(): Iterable<Session> = sessionRepository.findAll()
+    override fun listAllSessions(): Iterable<Session> = repo.findAll()
 
-    override fun getSessionById(id: Int): Session = sessionRepository.findOne(id)
-            ?: throw Exception("Session:$id not found")
+    override fun getSessionById(id: Int): Session = repo.findOne(id) ?: throw Exception("Session:$id not found")
 
-    override fun saveSession(session: Session): Session = sessionRepository.save(session)
+    override fun saveSession(session: Session): Session = repo.save(session)
 
-    override fun deleteSession(id: Int) = sessionRepository.delete(id)
+    override fun deleteSession(id: Int) = repo.delete(id)
 }

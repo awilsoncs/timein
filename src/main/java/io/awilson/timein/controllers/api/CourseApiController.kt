@@ -20,7 +20,7 @@ class CourseApiController {
      */
     @GetMapping("/{id}")
     fun get(@PathVariable id: Int): ResponseEntity<Course> {
-        val course : Course = service.getCourseById(id) ?: throw Exception("Could not find Course with id:$id")
+        val course : Course = service.getById(id) ?: throw Exception("Could not find Course with id:$id")
         return ResponseEntity(course, HttpStatus.OK)
     }
 
@@ -29,7 +29,7 @@ class CourseApiController {
      */
     @GetMapping
     fun get(): ResponseEntity<Iterable<Course>> {
-        val courses: Iterable<Course> = service.listAllCourses()
+        val courses: Iterable<Course> = service.listAll()
         return ResponseEntity(courses, HttpStatus.OK)
     }
 
@@ -38,7 +38,7 @@ class CourseApiController {
      */
     @PostMapping
     fun post(@RequestBody course: Course): ResponseEntity<Course> {
-        val updated = service.saveCourse(course)
+        val updated = service.save(course)
         return ResponseEntity(updated, HttpStatus.OK)
     }
 
@@ -47,7 +47,7 @@ class CourseApiController {
      */
     @DeleteMapping
     fun delete(@RequestParam(value="id", defaultValue = "0") id: Int): HttpStatus {
-        service.deleteCourse(id)
+        service.delete(id)
         return HttpStatus.OK
     }
 }

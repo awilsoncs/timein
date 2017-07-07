@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
  * RESTful api endpoints for Sessions
  */
 @RestController
-@RequestMapping("/api/Sessions")
+@RequestMapping("/api/sessions")
 class SessionApiController {
     @Autowired lateinit var service: SessionService
 
@@ -20,7 +20,7 @@ class SessionApiController {
      */
     @GetMapping("/{id}")
     fun get(@PathVariable id: Int): ResponseEntity<Session> {
-        val Session : Session = service.getSessionById(id) ?: throw Exception("Could not find Session with id:$id")
+        val Session : Session = service.getSessionById(id)
         return ResponseEntity(Session, HttpStatus.OK)
     }
 
