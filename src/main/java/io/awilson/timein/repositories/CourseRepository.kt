@@ -1,6 +1,6 @@
 package io.awilson.timein.repositories
 
 import io.awilson.timein.domain.Course
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.repository.PagingAndSortingRepository
 
-interface CourseRepository : CrudRepository<Course, Int>
+interface CourseRepository : PagingAndSortingRepository<Course, Int> {}

@@ -11,7 +11,6 @@ class Course {
     @Version
     var version: Int = 0
     var title: String = ""
-    @JsonIgnore
     @OneToMany(mappedBy = "course")
     var students: MutableList<Student> = ArrayList()
 }

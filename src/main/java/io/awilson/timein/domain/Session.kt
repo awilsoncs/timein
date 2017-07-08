@@ -9,6 +9,11 @@ import java.time.temporal.TemporalAdjusters.next
 
 @Entity
 class Session {
+    constructor() {}
+    constructor(student: Student) {
+        this.student = student
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Int = 0
@@ -16,7 +21,6 @@ class Session {
     var version: Int = 0
     var timeStart: Instant = Instant.now()
     var timeEnd: Instant? = null
-    @JsonIgnore
     @ManyToOne
     var student: Student? = null
 
@@ -60,7 +64,8 @@ class Session {
     /**
      * End the session now.
      */
-    fun close() {
+    fun close(): Session {
         timeEnd = Instant.now()
+        return this
     }
 }

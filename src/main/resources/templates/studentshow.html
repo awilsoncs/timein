@@ -59,8 +59,8 @@
                             <td th:text="${session.timeStart}">timeStart</td>
                             <td th:text="${session.timeEnd}">timeEnd</td>
                             <td th:text="${session.duration}">duration</td>
-                            <td><a th:href="${ '/session/' + session.id}">View</a></td>
-                            <td><a th:href="${'/session/edit/' + session.id}">Edit</a></td>
+                            <td><a th:href="${ '/site/sessions/' + session.id}">View</a></td>
+                            <td><a th:href="${ '/site/sessions/' + session.id + '/edit'}">Edit</a></td>
                         </tr>
                     </table>
                 </div>

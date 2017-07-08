@@ -23,17 +23,17 @@
                 <th>Edit</th>
             </tr>
             <tr th:each="student : ${students}">
-                <td th:text="${student.id}"><a href="/student/${student.id}">Id</a></td>
+                <td th:text="${student.id}"><a href="/site/students/${student.id}">Id</a></td>
                 <td th:text="${student.firstName}">FirstName</td>
                 <td th:text="${student.lastName}">LastName</td>
                 <td th:text="${student.course.title}">Course</td>
                 <td th:text="${student.instructor.fullName}">Instructor</td>
                 <td>
-                    <a th:if="${!student.anyActive()}" th:href="${ '/student/' + student.id + '/login'}">Login</a>
-                    <a th:if="${student.anyActive()}" th:href="${ '/student/' + student.id + '/logout'}">Logout</a>
+                    <a th:if="${!student.isOnline()}" th:href="${ '/site/students/' + student.id + '/login'}">Login</a>
+                    <a th:if="${student.isOnline()}" th:href="${ '/site/students/' + student.id + '/logout'}">Logout</a>
                 </td>
-                <td><a th:href="${ '/student/' + student.id}">View</a></td>
-                <td><a th:href="${ '/student/edit/' + student.id}">Edit</a></td>
+                <td><a th:href="${ '/site/students/' + student.id}">View</a></td>
+                <td><a th:href="${ '/site/students/' + student.id + '/edit'}">Edit</a></td>
             </tr>
         </table>
 

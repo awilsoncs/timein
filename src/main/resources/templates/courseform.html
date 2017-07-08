@@ -12,7 +12,7 @@
 
     <h2>Course Details</h2>
     <div>
-        <form class="form-horizontal" th:object="${course}" th:action="@{/courses}" method="post">
+        <form class="form-horizontal" th:object="${course}" th:action="@{/site/courses}" method="post">
             <input type="hidden" th:field="*{id}"/>
             <input type="hidden" th:field="*{version}"/>
             <div class="form-group">

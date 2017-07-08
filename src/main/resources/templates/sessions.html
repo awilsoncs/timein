@@ -22,13 +22,13 @@
                 <th>Edit</th>
             </tr>
             <tr th:each="session : ${sessions}">
-                <td th:text="${session.id}"><a href="/session/${session.id}">Id</a></td>
+                <td th:text="${session.id}"><a href="/sessions/${session.id}">Id</a></td>
                 <td th:text="${session.student.fullName}">student</td>
                 <td th:text="${session.timeStart}">timeStart</td>
                 <td th:text="${session.timeEnd}">timeEnd</td>
                 <td th:text="${session.duration}">duration</td>
-                <td><a th:href="${ '/session/' + session.id}">View</a></td>
-                <td><a th:href="${'/session/edit/' + session.id}">Edit</a></td>
+                <td><a th:href="${ '/sessions/' + session.id}">View</a></td>
+                <td><a th:href="${ '/sessions/' + session.id + '/edit/'}">Edit</a></td>
             </tr>
         </table>
 

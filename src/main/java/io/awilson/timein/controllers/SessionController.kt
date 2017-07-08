@@ -1,7 +1,7 @@
 package io.awilson.timein.controllers
 
 import io.awilson.timein.domain.Session
-import io.awilson.timein.services.SessionService
+import io.awilson.timein.repositories.SessionRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -13,44 +13,45 @@ import org.springframework.web.bind.annotation.RequestMethod
  * Provide a Controller for the Session class.
  */
 @Controller
+@RequestMapping("/site/sessions")
 class SessionController {
 
     @Autowired
-    lateinit var sessionService: SessionService
+    lateinit var repo: SessionRepository
 
-    @RequestMapping("session/new")
+    @RequestMapping("/new")
     fun newSession(model: Model): String {
         model.addAttribute("session", Session())
         return "sessionform"
     }
 
-    @RequestMapping(value = "session", method = arrayOf(RequestMethod.POST))
+    @RequestMapping(method = arrayOf(RequestMethod.POST))
     fun saveSession(session: Session): String {
-        sessionService.saveSession(session)
-        return "redirect:/session/" + session.id
+        repo.save(session)
+        return "redirect:/site/sessions/" + session.id
     }
 
-    @RequestMapping("session/{id}")
+    @RequestMapping("/{id}")
     fun showSession(@PathVariable id: Int, model: Model): String {
-        model.addAttribute("session", sessionService.getSessionById(id))
+        model.addAttribute("session", repo.findOne(id))
         return "sessionshow"
     }
 
-    @RequestMapping(value = "/sessions", method = arrayOf(RequestMethod.GET))
+    @RequestMapping(method = arrayOf(RequestMethod.GET))
     fun list(model: Model): String {
-        model.addAttribute("sessions", sessionService.listAllSessions())
+        model.addAttribute("sessions", repo.findAll())
         return "sessions"
     }
 
-    @RequestMapping("session/edit/{id}")
+    @RequestMapping("/{id}/edit")
     fun edit(@PathVariable id: Int, model: Model): String {
-        model.addAttribute("session", sessionService.getSessionById(id))
+        model.addAttribute("session", repo.findOne(id))
         return "sessionform"
     }
 
-    @RequestMapping("session/delete/{id}")
+    @RequestMapping("/{id}/delete")
     fun delete(@PathVariable id: Int): String {
-        sessionService.deleteSession(id)
-        return "redirect:/sessions"
+        repo.delete(id)
+        return "redirect:/site/sessions"
     }
 }

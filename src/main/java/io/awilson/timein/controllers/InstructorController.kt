@@ -1,7 +1,7 @@
 package io.awilson.timein.controllers
 
 import io.awilson.timein.domain.Instructor
-import io.awilson.timein.services.InstructorService
+import io.awilson.timein.repositories.InstructorRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -13,44 +13,45 @@ import org.springframework.web.bind.annotation.RequestMethod
  * Provide a Controller for the Instructor class.
  */
 @Controller
+@RequestMapping("site/instructors")
 class InstructorController {
 
     @Autowired
-    lateinit var instructorService: InstructorService
+    lateinit var repo: InstructorRepository
 
-    @RequestMapping("instructor/new")
+    @RequestMapping("/new")
     fun newInstructor(model: Model): String {
         model.addAttribute("instructor", Instructor())
         return "instructorform"
     }
 
-    @RequestMapping(value = "instructor", method = arrayOf(RequestMethod.POST))
+    @RequestMapping(method = arrayOf(RequestMethod.POST))
     fun saveInstructor(instructor: Instructor): String {
-        instructorService.saveInstructor(instructor)
-        return "redirect:/instructor/" + instructor.id
+        repo.save(instructor)
+        return "redirect:/site/instructors/" + instructor.id
     }
 
-    @RequestMapping("instructor/{id}")
+    @RequestMapping("/{id}")
     fun showInstructor(@PathVariable id: Int, model: Model): String {
-        model.addAttribute("instructor", instructorService.getInstructorById(id))
+        model.addAttribute("instructor", repo.findOne(id))
         return "instructorshow"
     }
 
-    @RequestMapping(value = "/instructors", method = arrayOf(RequestMethod.GET))
+    @RequestMapping(method = arrayOf(RequestMethod.GET))
     fun list(model: Model): String {
-        model.addAttribute("instructors", instructorService.listAllInstructors())
+        model.addAttribute("instructors", repo.findAll())
         return "instructors"
     }
 
-    @RequestMapping("instructor/edit/{id}")
+    @RequestMapping("/{id}/edit")
     fun edit(@PathVariable id: Int, model: Model): String {
-        model.addAttribute("instructor", instructorService.getInstructorById(id))
+        model.addAttribute("instructor", repo.findOne(id))
         return "instructorform"
     }
 
-    @RequestMapping("instructor/delete/{id}")
+    @RequestMapping("/{id}/delete")
     fun delete(@PathVariable id: Int): String {
-        instructorService.deleteInstructor(id)
-        return "redirect:/instructors"
+        repo.delete(id)
+        return "redirect:/site/instructors"
     }
 }

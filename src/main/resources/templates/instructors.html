@@ -21,12 +21,12 @@
                 <th>Edit</th>
             </tr>
             <tr th:each="instructor : ${instructors}">
-                <td th:text="${instructor.id}"><a href="/instructor/${instructor.id}">Id</a></td>
+                <td th:text="${instructor.id}"><a href="/site/instructors/${instructor.id}">Id</a></td>
                 <td th:text="${instructor.firstName}">FirstName</td>
                 <td th:text="${instructor.lastName}">LastName</td>
                 <td th:text="${instructor.email}">Email</td>
-                <td><a th:href="${ '/instructor/' + instructor.id}">View</a></td>
-                <td><a th:href="${ '/instructor/edit/' + instructor.id}">Edit</a></td>
+                <td><a th:href="${ '/site/instructors/' + instructor.id}">View</a></td>
+                <td><a th:href="${ '/site/instructors/' + instructor.id + '/edit/'}">Edit</a></td>
             </tr>
         </table>
 

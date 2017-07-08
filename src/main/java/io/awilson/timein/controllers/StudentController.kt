@@ -1,9 +1,11 @@
 package io.awilson.timein.controllers
 
+import io.awilson.timein.domain.Session
 import io.awilson.timein.domain.Student
-import io.awilson.timein.services.CourseService
-import io.awilson.timein.services.InstructorService
-import io.awilson.timein.services.StudentService
+import io.awilson.timein.repositories.CourseRepository
+import io.awilson.timein.repositories.InstructorRepository
+import io.awilson.timein.repositories.SessionRepository
+import io.awilson.timein.repositories.StudentRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -15,64 +17,71 @@ import org.springframework.web.bind.annotation.RequestMethod
  * Provide a Controller for the Student class.
  */
 @Controller
+@RequestMapping("/site/students")
 class StudentController {
 
     @Autowired
-    lateinit var studentService: StudentService
+    lateinit var studentRepo: StudentRepository
     @Autowired
-    lateinit var instructorService: InstructorService
+    lateinit var instructorRepo: InstructorRepository
     @Autowired
-    lateinit var courseService: CourseService
+    lateinit var courseRepo: CourseRepository
+    @Autowired
+    lateinit var sessionRepo: SessionRepository
 
-    @RequestMapping("student/new")
+    @RequestMapping("/new")
     fun newStudent(model: Model): String {
-        model.addAttribute("instructors", instructorService.listAllInstructors())
-        model.addAttribute("courses", courseService.listAll())
+        model.addAttribute("instructors", instructorRepo.findAll())
+        model.addAttribute("courses", courseRepo.findAll())
         model.addAttribute("student", Student())
         return "studentform"
     }
 
-    @RequestMapping(value = "student", method = arrayOf(RequestMethod.POST))
+    @RequestMapping(method = arrayOf(RequestMethod.POST))
     fun saveStudent(student: Student): String {
-        studentService.saveStudent(student)
+        studentRepo.save(student)
         return "redirect:/student/" + student.id
     }
 
-    @RequestMapping("student/{id}")
+    @RequestMapping("/{id}")
     fun showStudent(@PathVariable id: Int, model: Model): String {
-        model.addAttribute("student", studentService.getStudentById(id))
+        model.addAttribute("student", studentRepo.findOne(id))
         return "studentshow"
     }
 
-    @RequestMapping(value = "/students", method = arrayOf(RequestMethod.GET))
+    @RequestMapping(method = arrayOf(RequestMethod.GET))
     fun list(model: Model): String {
-        model.addAttribute("students", studentService.listAllStudents())
+        model.addAttribute("students", studentRepo.findAll())
         return "students"
     }
 
-    @RequestMapping("student/edit/{id}")
+    @RequestMapping("/{id}/edit")
     fun edit(@PathVariable id: Int, model: Model): String {
-        model.addAttribute("instructors", instructorService.listAllInstructors())
-        model.addAttribute("courses", courseService.listAll())
-        model.addAttribute("student", studentService.getStudentById(id))
+        model.addAttribute("instructors", instructorRepo.findAll())
+        model.addAttribute("courses", courseRepo.findAll())
+        model.addAttribute("student", studentRepo.findOne(id))
         return "studentform"
     }
 
-    @RequestMapping("student/delete/{id}")
+    @RequestMapping("/{id}/delete")
     fun delete(@PathVariable id: Int): String {
-        studentService.deleteStudent(id)
-        return "redirect:/students"
+        studentRepo.delete(id)
+        return "redirect:/site/students"
     }
 
-    @RequestMapping("student/{id}/login")
+    @RequestMapping("/{id}/login")
     fun login(@PathVariable id: Int): String {
-        studentService.login(id)
-        return "redirect:/students"
+        var student: Student = studentRepo.findOne(id)
+        sessionRepo.save(student.login())
+        studentRepo.save(student)
+        return "redirect:/site/students"
     }
 
-    @RequestMapping("student/{id}/logout")
+    @RequestMapping("/{id}/logout")
     fun logout(@PathVariable id: Int): String {
-        studentService.logout(id)
-        return "redirect:/students"
+        var student: Student = studentRepo.findOne(id)
+        sessionRepo.save(student.logout())
+        studentRepo.save(student)
+        return "redirect:/site/students"
     }
 }

@@ -12,39 +12,27 @@ class Student {
     var version: Int = 0
     var firstName: String = ""
     var lastName: String = ""
-    @JsonIgnore
     @ManyToOne
     var instructor: Instructor? = null
-    @JsonIgnore
     @ManyToOne
     var course: Course? = null
-    @JsonIgnore
     @OneToMany(mappedBy = "student")
     var sessions: MutableList<Session> = ArrayList()
-    @JsonIgnore
-    @OneToOne
-    var currentSession: Session? = null
     var active: Boolean = true
 
-    /**
-     * Does the student have any active sessions?
-
-     * @return true if the student has at least one active session.
-     */
-    fun anyActive(): Boolean = sessions.stream().anyMatch { it.isOpen }
-
-    val instructorId: Int?
-        get() = instructor?.id
-
-    val currentSessionId: Int?
-        get() = currentSession?.id
-
-    val courseId: Int?
-        get() = course?.id
-
     val isOnline: Boolean
-        get() = !(currentSession == null)
+        get() = sessions.any { it.isOpen }
 
     val fullName: String
         get() = "$firstName $lastName"
+
+    /**
+     * Log the student in and return the session.
+     */
+    fun login(): Session = if (isOnline) sessions.first { it.isOpen } else Session(this)
+
+    /**
+     * Log the student out and return the session if available.
+     */
+    fun logout(): Session? = if (isOnline) sessions.first { it.isOpen }.close() else null
 }
