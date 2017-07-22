@@ -2,6 +2,7 @@ package io.awilson.timein.reports;
 
 import io.awilson.timein.domain.Session;
 import io.awilson.timein.domain.Student;
+import lombok.extern.java.Log;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -19,9 +20,9 @@ import static java.time.temporal.TemporalAdjusters.previous;
 /**
  * Provide reports that roll up Session Durations based on criteria function and groups by Student.
  */
+@Log
 public class CumulativeTimeReport {
 
-    private static final Logger log = Logger.getLogger(CumulativeTimeReport.class.getName());
     private Map<Student, Duration> studentDurations;
 
     /**
