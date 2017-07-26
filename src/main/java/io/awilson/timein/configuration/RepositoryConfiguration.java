@@ -11,5 +11,4 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EntityScan(basePackages = {"io.awilson.timein.domain"})
 @EnableJpaRepositories(basePackages = {"io.awilson.timein.repositories"})
 @EnableTransactionManagement
-public class RepositoryConfiguration {
-}
+class RepositoryConfiguration { }

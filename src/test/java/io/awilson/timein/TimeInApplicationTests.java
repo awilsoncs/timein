@@ -11,7 +11,4 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @WebAppConfiguration
 public class TimeInApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
 }

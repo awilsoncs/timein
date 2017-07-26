@@ -1,6 +1,5 @@
 package io.awilson.timein.controllers
 
-import io.awilson.timein.domain.Session
 import io.awilson.timein.domain.Student
 import io.awilson.timein.repositories.CourseRepository
 import io.awilson.timein.repositories.InstructorRepository
@@ -71,7 +70,7 @@ class StudentController {
 
     @RequestMapping("/{id}/login")
     fun login(@PathVariable id: Int): String {
-        var student: Student = studentRepo.findOne(id)
+        val student: Student = studentRepo.findOne(id)
         sessionRepo.save(student.login())
         studentRepo.save(student)
         return "redirect:/site/students"
@@ -79,7 +78,7 @@ class StudentController {
 
     @RequestMapping("/{id}/logout")
     fun logout(@PathVariable id: Int): String {
-        var student: Student = studentRepo.findOne(id)
+        val student: Student = studentRepo.findOne(id)
         sessionRepo.save(student.logout())
         studentRepo.save(student)
         return "redirect:/site/students"

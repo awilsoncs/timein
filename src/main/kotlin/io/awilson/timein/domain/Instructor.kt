@@ -1,6 +1,5 @@
 package io.awilson.timein.domain
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -16,6 +15,5 @@ class Instructor {
     @OneToMany(mappedBy = "instructor")
     var students: MutableList<Student> = ArrayList()
 
-    val fullName: String
-        get() = "$firstName $lastName"
+    val fullName: String = "$firstName $lastName"
 }

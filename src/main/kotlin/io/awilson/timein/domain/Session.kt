@@ -1,15 +1,13 @@
 package io.awilson.timein.domain
 
-import com.fasterxml.jackson.annotation.JsonIgnore
-import javax.persistence.*
 import java.time.*
-
 import java.time.DayOfWeek.FRIDAY
 import java.time.temporal.TemporalAdjusters.next
+import javax.persistence.*
 
 @Entity
 class Session {
-    constructor() {}
+    constructor()
     constructor(student: Student) {
         this.student = student
     }

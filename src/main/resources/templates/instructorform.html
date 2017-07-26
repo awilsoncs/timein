@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
 
-    <title>Spring Framework Guru</title>
+    <title>timein - Edit Instructor</title>
 
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
@@ -12,6 +12,7 @@
 
     <h2>Instructor Details</h2>
     <div>
+        <!--/*@thymesVar id="instructor" type="io.awilson.timein.domain.Instructor"*/-->
         <form class="form-horizontal" th:object="${instructor}" th:action="@{/site/instructors}" method="post">
             <input type="hidden" th:field="*{id}"/>
             <input type="hidden" th:field="*{version}"/>
