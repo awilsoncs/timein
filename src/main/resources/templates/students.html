@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
 
-    <title>Spring Framework Guru</title>
+    <title>Students</title>
 
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
@@ -29,8 +29,9 @@
                 <td th:text="${student.course.title}">Course</td>
                 <td th:text="${student.instructor.fullName}">Instructor</td>
                 <td>
-                    <a th:if="${!student.anyActive()}" th:href="${ '/student/' + student.id + '/login'}">Login</a>
-                    <a th:if="${student.anyActive()}" th:href="${ '/student/' + student.id + '/logout'}">Logout</a>
+                    <span th:if="${!student.active}">Inactive</span>
+                    <a th:if="${!student.isOnline() and student.active}" th:href="${ '/student/' + student.id + '/login'}">Login</a>
+                    <a th:if="${student.isOnline() and student.active}" th:href="${ '/student/' + student.id + '/logout'}">Logout</a>
                 </td>
                 <td><a th:href="${ '/student/' + student.id}">View</a></td>
                 <td><a th:href="${ '/student/edit/' + student.id}">Edit</a></td>

@@ -20,13 +20,14 @@ class Student {
     var sessions: MutableList<Session> = ArrayList()
     @OneToOne
     var currentSession: Session? = null
+    var active: Boolean = true
 
     /**
      * Does the student have any active sessions?
 
      * @return true if the student has at least one active session.
      */
-    fun anyActive(): Boolean? = sessions.stream().anyMatch { x -> x.isOpen }
+    fun isOnline(): Boolean? = sessions.stream().anyMatch { it.isOpen }
 
     val fullName: String
         get() = "$firstName $lastName"

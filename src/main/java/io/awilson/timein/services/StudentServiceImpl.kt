@@ -16,21 +16,15 @@ class StudentServiceImpl : StudentService {
     @Autowired
     lateinit var sessionService: SessionService
 
-    override fun listAllStudents(): Iterable<Student> {
-        return studentRepository.findAll()
-    }
+    override fun listActiveStudents(): Iterable<Student> = studentRepository.findByActive(true)
 
-    override fun getStudentById(id: Int): Student {
-        return studentRepository.findOne(id)
-    }
+    override fun listAllStudents(): Iterable<Student> = studentRepository.findAll()
 
-    override fun saveStudent(student: Student): Student {
-        return studentRepository.save(student)
-    }
+    override fun getStudentById(id: Int): Student = studentRepository.findOne(id)
 
-    override fun deleteStudent(id: Int) {
-        studentRepository.delete(id)
-    }
+    override fun saveStudent(student: Student): Student = studentRepository.save(student)
+
+    override fun deleteStudent(id: Int) = studentRepository.delete(id)
 
     override fun login(id: Int) {
         val student = getStudentById(id)
