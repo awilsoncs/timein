@@ -3,12 +3,9 @@ package io.awilson.timein.reports;
 import io.awilson.timein.domain.Session;
 import io.awilson.timein.domain.Student;
 import lombok.Getter;
-import lombok.extern.java.Log;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;

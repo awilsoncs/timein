@@ -2,7 +2,6 @@ package io.awilson.timein.services
 
 import io.awilson.timein.domain.Session
 import io.awilson.timein.repositories.SessionRepository
-import lombok.Setter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 

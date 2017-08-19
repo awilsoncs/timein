@@ -3,7 +3,6 @@ package io.awilson.timein.services
 import io.awilson.timein.domain.Session
 import io.awilson.timein.domain.Student
 import io.awilson.timein.repositories.StudentRepository
-import lombok.AllArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 

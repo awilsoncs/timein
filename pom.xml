@@ -113,7 +113,7 @@
 				<executions>
 					<execution>
 						<id>compile</id>
-						<phase>compile</phase>
+						<phase>process-sources</phase>
 						<goals>
 							<goal>compile</goal>
 						</goals>
@@ -127,6 +127,11 @@
 					</execution>
 				</executions>
 				<configuration>
+					<sourceDirs>
+						<source>src/main/java</source>
+						<source>src/main/kotlin</source>
+						<source>src/main/resources</source>
+					</sourceDirs>
 					<jvmTarget>1.8</jvmTarget>
 				</configuration>
 			</plugin>
@@ -152,6 +157,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>
